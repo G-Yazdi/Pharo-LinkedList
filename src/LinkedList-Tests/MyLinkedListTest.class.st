@@ -186,48 +186,25 @@ MyLinkedListTest >> testRemoveValue [
 	list create.
 	list insertBegin: 0.
 	
-	list removeValue: 0.
+	list removeValue: 0.           "remove begin"
 	self assert: list head isNil.
 	self assert: list tail isNil.
 	self assert: (list length ) equals: 0.
 	
 	list insertBegin: 0.
 	list insertBegin: 1.
-	list removeValue: 0.
+	
+	list removeValue: 0.            "remove end"
 	self assert: (list head) value equals: 1.
-	self assert: (list head) value equals: 1.
+	self assert: (list tail) value equals: 1.
 	self assert: (list length ) equals: 1.
 	
-	"list insertValue: 1 atPosition: 1.
-	self assert: (list head) value equals: 0.
+	list insertBegin: 2.
+	list insertBegin: 1.
+
+	list removeValue: 2.            "remove midle"
+	self assert: (list head) value equals: 1.
 	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 2.
-	
-	list insertValue: 2 atPosition: 1.
-	self assert: (list head) value equals: 0.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 3.
-	
-	list insertValue: 22 atPosition: 2.
-	self assert: (list head) value equals: 0.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 4.
-	
-	list insertValue: 3 atPosition: 0.	
-	self assert: (list head) value equals: 3.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 5.
-	
-	list insertValue: 3 atPosition: 10.	
-	self assert: (list head) value equals: 3.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 5.
-	
-	list insertValue: 3 atPosition: -1.	
-	self assert: (list head) value equals: 3.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 4.	"
-		
-	
+	self assert: (list length ) equals: 2.	
 	
 ]

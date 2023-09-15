@@ -110,7 +110,7 @@ MyLinkedList >> removeValue: aValue [
 			(currentNode value = aValue) 
 				ifTrue: [ 
 					(index = 0)ifTrue: [ ^ self removeBegin ].
-					(index = len - 1)ifTrue: [ ^ self removeEnd ]. 
+					(index = (len - 1)) ifTrue: [ ^ self removeEnd ]. 
 					previousNode next: currentNode next.
 					^aValue].
 				index  := index + 1.
