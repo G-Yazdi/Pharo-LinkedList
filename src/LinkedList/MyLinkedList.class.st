@@ -7,3 +7,98 @@ Class {
 	],
 	#category : #LinkedList
 }
+
+{ #category : #creating }
+MyLinkedList >> create [
+	head := tail := nil.
+]
+
+{ #category : #accessing }
+MyLinkedList >> head [
+	^head
+]
+
+{ #category : #inserting }
+MyLinkedList >> insertBegin: aValue [
+	|node|
+	node := MyNode new create: aValue.
+	
+	node next: head.
+	head := node.
+	tail ifNil: [ tail:= node].
+ 	
+]
+
+{ #category : #inserting }
+MyLinkedList >> insertEnd: aValue [
+
+	|node|
+	node := MyNode new create: aValue.
+
+	tail ifNotNil:[ tail next: node ].
+	head ifNil: [ head := node ]. 
+	tail := node.
+]
+
+{ #category : #inserting }
+MyLinkedList >> insertValue: aValue atPosition: aPosition [
+
+	| len index currentNode node |
+	len := self length.
+	(aPosition between: 0 and: len) ifFalse: [ ^ self ].
+	(aPosition = 0)ifTrue: [ ^ self insertBegin: aValue ].
+	(aPosition = len)ifTrue: [ ^ self insertEnd: aValue ].
+	node := MyNode new.
+	node value: aValue.
+	node next: nil.
+	index := 0.
+	currentNode := head.
+	[ index < (aPosition - 1) ] whileTrue: [
+		index := index + 1.
+		currentNode := currentNode next ].
+	node next: currentNode next.
+	currentNode next: node
+]
+
+{ #category : #accessing }
+MyLinkedList >> length [
+
+	|length currentNode|
+	length := 0.
+	currentNode := head.
+	[currentNode isNotNil] whileTrue: [ 
+		length := length +1.
+		currentNode := currentNode next. ].
+	^length
+]
+
+{ #category : #removing }
+MyLinkedList >> removeBegin [
+	head ifNotNil: [
+		head := head next.
+		head ifNil: [ tail := nil ].
+		].
+]
+
+{ #category : #removing }
+MyLinkedList >> removeEnd [
+
+	head ifNotNil: [
+		|previousNode currentNode|
+		currentNode := head.
+		previousNode := nil. 
+		(currentNode next) whileTrue: [ 
+			previousNode := currentNode. 
+			currentNode := currentNode next ].
+		currentNode := nil.
+		tail := previousNode.
+		tail 
+			ifNil: [ head := nil ]
+			ifNotNil: [tail next: nil].
+		 ]
+]
+
+{ #category : #accessing }
+MyLinkedList >> tail [
+	^tail
+]
