@@ -49,8 +49,7 @@ MyLinkedList >> insertValue: aValue atPosition: aPosition [
 	(aPosition = 0)ifTrue: [ ^ self insertBegin: aValue ].
 	(aPosition = len)ifTrue: [ ^ self insertEnd: aValue ].
 	node := MyNode new.
-	node value: aValue.
-	node next: nil.
+	node create: aValue.
 	index := 0.
 	currentNode := head.
 	[ index < (aPosition - 1) ] whileTrue: [
@@ -87,7 +86,7 @@ MyLinkedList >> removeEnd [
 		|previousNode currentNode|
 		currentNode := head.
 		previousNode := nil. 
-		(currentNode next) whileTrue: [ 
+		[(currentNode next) isNotNil] whileTrue: [ 
 			previousNode := currentNode. 
 			currentNode := currentNode next ].
 		currentNode := nil.
@@ -96,6 +95,30 @@ MyLinkedList >> removeEnd [
 			ifNil: [ head := nil ]
 			ifNotNil: [tail next: nil].
 		 ]
+]
+
+{ #category : #removing }
+MyLinkedList >> removeValue: aValue [
+
+	| len index currentNode previousNode|
+	len := self length.
+	index := 0.
+	currentNode := head.
+	previousNode := nil.
+	[ currentNode isNotNil ] 
+		whileTrue: [
+			(currentNode value = aValue) 
+				ifTrue: [ 
+					(index = 0)ifTrue: [ ^ self removeBegin ].
+					(index = len - 1)ifTrue: [ ^ self removeEnd ]. 
+					previousNode next: currentNode next.
+					^aValue].
+				index  := index + 1.
+				previousNode := currentNode.
+				currentNode := currentNode next
+		]. ^nil.
+	
+	
 ]
 
 { #category : #accessing }

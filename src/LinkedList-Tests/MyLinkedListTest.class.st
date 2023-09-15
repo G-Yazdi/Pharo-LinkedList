@@ -117,3 +117,117 @@ MyLinkedListTest >> testLength [
 	list insertEnd: value.
 	self assert: (list length) value equals: 3.
 ]
+
+{ #category : #'removing-tests' }
+MyLinkedListTest >> testRemoveBegin [
+	| list|
+	
+	
+	list := MyLinkedList new.
+	
+	list removeBegin.
+	self assert: list head equals: nil.
+	self assert: list tail equals: nil.
+	self assert: list length equals: 0.
+	
+	list insertEnd: 0.
+	
+	list removeBegin.
+	self assert: list head equals: nil.
+	self assert: list tail equals: nil.
+	self assert: list length equals: 0.
+	
+	list insertEnd: 1.
+	list insertEnd: 2.
+	list insertEnd: 3.	
+	
+	list removeBegin.
+	self assert: (list head) value equals: 2.
+	self assert: list length equals: 2.
+	
+	
+]
+
+{ #category : #'removing-tests' }
+MyLinkedListTest >> testRemoveEnd [
+	| list|
+	
+	
+	list := MyLinkedList new.
+	
+	list removeEnd.
+	self assert: list head equals: nil.
+	self assert: list tail equals: nil.
+	self assert: list length equals: 0.
+	
+	list insertEnd: 0.
+	
+	list removeEnd.
+	self assert: list head equals: nil.
+	self assert: list tail equals: nil.
+	self assert: list length equals: 0.
+	
+	list insertEnd: 1.
+	list insertEnd: 2.
+	list insertEnd: 3.	
+	
+	list removeEnd.
+	self assert: (list tail) value equals: 2.
+	self assert: list length equals: 2.
+	
+	
+]
+
+{ #category : #'removing-tests' }
+MyLinkedListTest >> testRemoveValue [
+	|list|	
+	
+	list := MyLinkedList new.
+	list create.
+	list insertBegin: 0.
+	
+	list removeValue: 0.
+	self assert: list head isNil.
+	self assert: list tail isNil.
+	self assert: (list length ) equals: 0.
+	
+	list insertBegin: 0.
+	list insertBegin: 1.
+	list removeValue: 0.
+	self assert: (list head) value equals: 1.
+	self assert: (list head) value equals: 1.
+	self assert: (list length ) equals: 1.
+	
+	"list insertValue: 1 atPosition: 1.
+	self assert: (list head) value equals: 0.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 2.
+	
+	list insertValue: 2 atPosition: 1.
+	self assert: (list head) value equals: 0.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 3.
+	
+	list insertValue: 22 atPosition: 2.
+	self assert: (list head) value equals: 0.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 4.
+	
+	list insertValue: 3 atPosition: 0.	
+	self assert: (list head) value equals: 3.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 5.
+	
+	list insertValue: 3 atPosition: 10.	
+	self assert: (list head) value equals: 3.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 5.
+	
+	list insertValue: 3 atPosition: -1.	
+	self assert: (list head) value equals: 3.
+	self assert: (list tail) value equals: 1.
+	self assert: (list length ) equals: 4.	"
+		
+	
+	
+]
