@@ -83,18 +83,21 @@ MyLinkedList >> removeBegin [
 MyLinkedList >> removeEnd [
 
 	head ifNotNil: [
-		|previousNode currentNode|
+		|currentNode previousNode|
+		
 		currentNode := head.
-		previousNode := nil. 
-		[(currentNode next) isNotNil] whileTrue: [ 
-			previousNode := currentNode. 
+		previousNode := nil.
+		[currentNode next isNotNil] whileTrue: [
+			previousNode := currentNode . 
 			currentNode := currentNode next ].
-		currentNode := nil.
+		
 		tail := previousNode.
 		tail 
 			ifNil: [ head := nil ]
 			ifNotNil: [tail next: nil].
 		 ]
+	
+
 ]
 
 { #category : #removing }
