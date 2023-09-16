@@ -100,25 +100,17 @@ MyLinkedList >> removeEnd [
 { #category : #removing }
 MyLinkedList >> removeValue: aValue [
 
-	| len index currentNode previousNode|
-	len := self length.
-	index := 0.
+	| currentNode |
+	
+	head value = aValue ifTrue: [ ^ self removeBegin ].
 	currentNode := head.
-	previousNode := nil.
-	[ currentNode isNotNil ] 
-		whileTrue: [
-			(currentNode value = aValue) 
-				ifTrue: [ 
-					(index = 0)ifTrue: [ ^ self removeBegin ].
-					(index = (len - 1)) ifTrue: [ ^ self removeEnd ]. 
-					previousNode next: currentNode next.
-					^aValue].
-				index  := index + 1.
-				previousNode := currentNode.
-				currentNode := currentNode next
-		]. ^nil.
-	
-	
+	[ currentNode next isNotNil ] whileTrue: [
+		currentNode next value = aValue ifTrue: [
+			currentNode next next ifNil: [ ^ self removeEnd ].
+			currentNode next: currentNode next next.
+			^ aValue ].
+		currentNode := currentNode next ].
+	^ nil
 ]
 
 { #category : #accessing }
