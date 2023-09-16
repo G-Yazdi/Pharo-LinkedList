@@ -1,3 +1,8 @@
+"
+I am Node, the elementary part of a LinkedList.
+
+I hold a value, as well as a link to my successor (next).
+"
 Class {
 	#name : #MyNode,
 	#superclass : #Object,

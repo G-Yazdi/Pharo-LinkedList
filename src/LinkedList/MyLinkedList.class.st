@@ -1,3 +1,6 @@
+"
+I am LinkedList, a data structure consisting of a collection of nodes which together represent a sequence. Indeed, each element points to the next. 
+"
 Class {
 	#name : #MyLinkedList,
 	#superclass : #Object,
@@ -20,6 +23,8 @@ MyLinkedList >> head [
 
 { #category : #inserting }
 MyLinkedList >> insertBegin: aValue [
+	"I take a value and insert it at the begining of the linkedList"
+	
 	|node|
 	node := MyNode new create: aValue.
 	
@@ -31,6 +36,7 @@ MyLinkedList >> insertBegin: aValue [
 
 { #category : #inserting }
 MyLinkedList >> insertEnd: aValue [
+	"I take a value and insert it at the end of the linkedList."
 
 	|node|
 	node := MyNode new create: aValue.
@@ -42,12 +48,17 @@ MyLinkedList >> insertEnd: aValue [
 
 { #category : #inserting }
 MyLinkedList >> insertValue: aValue atPosition: aPosition [
-
+	"I take a value and a position and insert the value at the position in linkedList"
+	"I consider 0 for the position of the first node"	
+		
 	| len index currentNode node |
+	
 	len := self length.
-	(aPosition between: 0 and: len) ifFalse: [ ^ self ].
+	
+	(aPosition between: 0 and: len) ifFalse: [ ^ self ]. "out of the linkedList's range"
 	(aPosition = 0)ifTrue: [ ^ self insertBegin: aValue ].
 	(aPosition = len)ifTrue: [ ^ self insertEnd: aValue ].
+	
 	node := MyNode new.
 	node create: aValue.
 	index := 0.
@@ -61,7 +72,8 @@ MyLinkedList >> insertValue: aValue atPosition: aPosition [
 
 { #category : #accessing }
 MyLinkedList >> length [
-
+	"I return the length of the linkedList"
+	
 	|length currentNode|
 	length := 0.
 	currentNode := head.
@@ -73,6 +85,8 @@ MyLinkedList >> length [
 
 { #category : #removing }
 MyLinkedList >> removeBegin [
+	"I remove the first node of the linkedList"
+	
 	head ifNotNil: [
 		head := head next.
 		head ifNil: [ tail := nil ].
@@ -81,7 +95,8 @@ MyLinkedList >> removeBegin [
 
 { #category : #removing }
 MyLinkedList >> removeEnd [
-
+	"I remove the last node of the linkedList"
+	
 	head ifNotNil: [
 		|currentNode previousNode|
 		
@@ -102,6 +117,7 @@ MyLinkedList >> removeEnd [
 
 { #category : #removing }
 MyLinkedList >> removeValue: aValue [
+	"I remove the first node which its value matches the given value"
 
 	| currentNode |
 	

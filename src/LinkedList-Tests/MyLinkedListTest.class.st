@@ -59,12 +59,13 @@ MyLinkedListTest >> testInsertValueAtPosition [
 	
 	list := MyLinkedList new.
 	list create.
-	list insertValue: 0 atPosition: 0.
+	
+	list insertValue: 0 atPosition: 0. "test insert in the empty linkedList"
 	self assert: (list head) value equals: 0.
 	self assert: (list tail) value equals: 0.
 	self assert: (list length ) equals: 1.
 	
-	list insertValue: 1 atPosition: 1.
+	list insertValue: 1 atPosition: 1. "test insert at the end"
 	self assert: (list head) value equals: 0.
 	self assert: (list tail) value equals: 1.
 	self assert: (list length ) equals: 2.
@@ -87,13 +88,7 @@ MyLinkedListTest >> testInsertValueAtPosition [
 	list insertValue: 3 atPosition: 10.	
 	self assert: (list head) value equals: 3.
 	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 5.
-	
-	"list insertValue: 3 atPosition: -1.	
-	self assert: (list head) value equals: 3.
-	self assert: (list tail) value equals: 1.
-	self assert: (list length ) equals: 4.	"
-		
+	self assert: (list length ) equals: 5.	
 	
 	
 ]
